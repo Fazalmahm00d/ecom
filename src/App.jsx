@@ -14,24 +14,27 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 function App() {
   
   return (
-    <body className='bg-[#F7F6F4]'>
-      <BrowserRouter>
-
+    <div >
       <Routes>
+        <Route path='/' element={
+          <div className='bg-[#F7F6F4]'>
+          <Header></Header>
+          <Component1></Component1>
+          <Component2></Component2>
+          <Component3></Component3>
+          <Component4></Component4>
+          <Component5></Component5>
+          <Component6></Component6>
+          <Component7></Component7>
+          <Footer></Footer>
+          </div>
+        }/>
         <Route path="/login" element={<Login/>}  />
-
       </Routes>
-      </BrowserRouter>
-      <Header></Header>
-      <Component1></Component1>
-      <Component2></Component2>
-      <Component3></Component3>
-      <Component4></Component4>
-      <Component5></Component5>
-      <Component6></Component6>
-      <Component7></Component7>
-      <Footer></Footer>
-    </body>
+     
+      
+     
+    </div>
   )
 }
 
