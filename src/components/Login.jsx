@@ -1,6 +1,8 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { CartContext } from "./contextAPI";
 
 function Login(){
+    const MyContext=useContext(CartContext)
     const logInURL="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAnCRZfZTUHUPdYrWGjYPV7PSstRIKboSM"
     const signUpURL="https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAnCRZfZTUHUPdYrWGjYPV7PSstRIKboSM"
     const [isLogin,setIsLogin]=useState(false);
@@ -15,7 +17,8 @@ function Login(){
             }
         })
         const result = await response.json();
-        localStorage.setItem('token',result.idToken)
+        localStorage.setItem('token',result.idToken);
+        MyContext.setIsAuthenticate(result.idToken)
     }
     function switchLogInMode(){
         setIsLogin(true);

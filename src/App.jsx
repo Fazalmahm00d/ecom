@@ -11,6 +11,7 @@ import Component7 from './components/Component7'
 import Footer from './components/Footer'
 import Login from './components/Login'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Dynamic from './components/Dynamic'
 function App() {
   
   return (
@@ -30,6 +31,7 @@ function App() {
           </div>
         }/>
         <Route path="/login" element={<Login/>}  />
+        <Route path='/items/:id' element={<Dynamic/>}/>
       </Routes>
      
       

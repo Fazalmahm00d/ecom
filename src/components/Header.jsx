@@ -7,6 +7,8 @@ function Header(){
     const MyContext=useContext(CartContext)
     const [cartDisplay,setCartDisplay]=useState(false);
     const [headToLogin,setHeadToLogin]=useState(false);
+    const arr=MyContext.cartitems
+    let length=arr.length
     const displayCart=()=>{
         MyContext.isAuthenticate ? setCartDisplay(true):setHeadToLogin(true)
     }
@@ -18,15 +20,16 @@ function Header(){
     //     )
     // }
     function logOutHandler(){
+        console.log('function called')
         localStorage.clear();
-        
+        MyContext.setIsAuthenticate(false);
     }
 
     return(
         <div className='flex justify-center'>
             <div className='flex bg-[#F7F6F4] justify-between items-center w-[80%] py-6 '>
             <div className='w-[25%]'>
-                <img src={matoaLogo} alt="" />
+                <Link to="/"><img src={matoaLogo} alt="" /></Link>
             </div>
             <div className='flex items-center justify-center text-xl gap-5 text-[#333333] w-[50%]'>
                 <div>Watches</div>
@@ -45,10 +48,11 @@ function Header(){
                     
                     <div className='text-xl'>{MyContext.isAuthenticate ? <button onClick={logOutHandler}>Log Out</button> : <Link to="/login">Log In</Link>}</div>
                 </div>
-                <button className='bg-[#f1ddc9] p-2 rounded-full' onClick={displayCart} >
+                <button className='bg-[#f1ddc9] p-3 rounded-full relative' onClick={displayCart} >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M19.2908 3.84C19.8033 3.83988 20.2256 4.24237 20.25 4.7543L21.1187 22.9943C21.1312 23.2566 21.0357 23.5125 20.8545 23.7025C20.6733 23.8925 20.4222 24 20.1596 24H4.79962C4.53714 23.9999 4.28615 23.8923 4.10505 23.7023C3.92396 23.5123 3.82856 23.2565 3.84106 22.9943L4.70966 4.7543C4.73406 4.24241 5.15623 3.83993 5.6687 3.84H8.68627C8.68627 1.71923 10.4055 0 12.5263 0C14.647 0 16.3663 1.71923 16.3663 3.84H19.2908ZM15.4063 3.84C15.4045 2.25017 14.1161 0.961799 12.5263 0.96C10.9364 0.961799 9.64807 2.25017 9.64627 3.84H15.4063ZM5.66871 4.8H8.68628V8.16C8.68628 8.4251 8.90118 8.64 9.16628 8.64C9.43138 8.64 9.64628 8.4251 9.64628 8.16V4.8H15.4063V8.16C15.4063 8.4251 15.6212 8.64 15.8863 8.64C16.1514 8.64 16.3663 8.4251 16.3663 8.16V4.8H19.2798L19.9742 19.2H4.98298L5.66871 4.8ZM4.9368 20.16L4.79962 23.04H20.1596L20.0205 20.16H4.9368Z" fill="#333333"/>
                     </svg>
+                    <span className='absolute top-[-0.3rem] right-[-0.5rem] z-50 h-6 w-6 bg-red-500 text-white px-2 pt-1  text-xs rounded-full text-center'>{length}</span>
                 </button>
             </div>
         </div>

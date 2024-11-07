@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import Heart from '../assets/love.svg'
 import { CartContext } from './contextAPI';
+import { Link } from 'react-router-dom';
 
 function Component31(props){
     const MyContextData=useContext(CartContext);
@@ -15,8 +16,9 @@ function Component31(props){
         console.log("item added to cart",MyContextData.cartitems)
     }
     return(
+        <Link to={`/items/${props.data.id}`}>
         <div className=" p-3 bg-white group ">
-             <img src={props.data.img} alt="" width="200px" height="220px" />
+             <img className='w-full' src={props.data.img} alt="" width="200px" height="220px" />
              <div className='py-5'>
                 <h2 className='font-700 text-2xl font-medium '>{props.data.name}</h2>
                 <p className='font-light text-sm'>{props.data.discount}</p>
@@ -29,6 +31,7 @@ function Component31(props){
               <button className='py-2 w-[80%] bg-[#d84727] text-white' onClick={addToCart}>Add To Cart</button>
              </div>
            </div>
+        </Link>
     )
 }
 
