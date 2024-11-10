@@ -3,6 +3,9 @@ import Img5 from '../assets/Mask Group.png'
 import Img6 from '../assets/Mask Group (1).png'
 import Img7 from '../assets/Mask Group (2).png'
 import Heart from '../assets/love.svg'
+import Img01 from '../assets/accessories.jpg'
+import Img02 from '../assets/3545.jpg'
+
 import Component31 from './Component31'
 
 function Component3(){
@@ -34,6 +37,20 @@ function Component3(){
       name:"Mini Maple",
       discount:"10% Off",
       price:1024, 
+    },
+    {
+      id:'24appqf10h',
+      img:Img01,
+      name:"Classy Black",
+      discount:"10% Off",
+      price:1124, 
+    },
+    {
+      id:'24appqqah',
+      img:Img02,
+      name:"Royale Brown",
+      discount:"10% Off",
+      price:1824, 
     },
     
   ]

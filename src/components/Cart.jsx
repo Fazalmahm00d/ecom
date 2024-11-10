@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "./contextAPI";
 
 
@@ -16,6 +16,10 @@ function Cart(props){
         setExpenses(totalExpenses)
     }
     updateTotal();
+    useEffect(()=>{
+        CartContextData.getCartData()
+    }
+,[])
     return(
         <div className="absolute top-0 left-0 flex justify-center items-center h-[100vh] w-full bg-neutral-500 bg-opacity-[0.5] z-[999]">
             <div className="bg-white p-8 w-[50%]">

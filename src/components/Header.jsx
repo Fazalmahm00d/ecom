@@ -1,16 +1,24 @@
 import { Link } from 'react-router-dom';
 import matoaLogo from '../assets/image 5.svg'
 import Cart from './Cart'
-import { isValidElement, useContext, useState } from 'react';
+import { isValidElement, useContext, useEffect, useState } from 'react';
 import { CartContext } from './contextAPI';
+import Heart from '../assets/love.svg'
+import WishList from './WishList';
 function Header(){
     const MyContext=useContext(CartContext)
     const [cartDisplay,setCartDisplay]=useState(false);
+    const [wishDisplay,setWishDisplay]=useState(false);
     const [headToLogin,setHeadToLogin]=useState(false);
     const arr=MyContext.cartitems
     let length=arr.length
+    const arr2=MyContext.wishitems
+    let length2=arr2.length
     const displayCart=()=>{
         MyContext.isAuthenticate ? setCartDisplay(true):setHeadToLogin(true)
+    }
+    const displayWish=()=>{
+        MyContext.isAuthenticate ? setWishDisplay(true):setHeadToLogin(true)
     }
     // function showPopUp(){
     //     return(
@@ -23,8 +31,15 @@ function Header(){
         console.log('function called')
         localStorage.clear();
         MyContext.setIsAuthenticate(false);
+        MyContext.setIsEmail(undefined)
     }
-
+    useEffect(()=>{
+        MyContext.getCartData()
+    }
+,[MyContext.isEmail])
+useEffect(()=>{
+    MyContext.getWishData();
+},[MyContext.isEmail])
     return(
         <div className='flex justify-center'>
             <div className='flex bg-[#F7F6F4] justify-between items-center w-[80%] py-6 '>
@@ -54,8 +69,18 @@ function Header(){
                     </svg>
                     <span className='absolute top-[-0.3rem] right-[-0.5rem] z-50 h-6 w-6 bg-red-500 text-white px-2 pt-1  text-xs rounded-full text-center'>{length}</span>
                 </button>
+                <button className='bg-[#f1ddc9] p-3 rounded-full relative' onClick={displayWish} >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-heart" viewBox="-1 -2 18 18">
+  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+</svg>
+                    
+                    <span className='absolute top-[-0.3rem] right-[-0.5rem] z-50 h-6 w-6 bg-red-500 text-white px-2 pt-1  text-xs rounded-full text-center'>{length2}</span>
+                </button>
             </div>
         </div>
+        {
+            wishDisplay ? <WishList setWishDisplay={setWishDisplay} />:""
+        }
         {
             cartDisplay ? <Cart setCartDisplay={setCartDisplay} />:""
         }

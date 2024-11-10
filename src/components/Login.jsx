@@ -19,6 +19,9 @@ function Login(){
         const result = await response.json();
         localStorage.setItem('token',result.idToken);
         MyContext.setIsAuthenticate(result.idToken)
+        const newEmail = data.email.replace(/[@.]/g, "");
+        localStorage.setItem('email',newEmail);
+        MyContext.setIsEmail(newEmail)
     }
     function switchLogInMode(){
         setIsLogin(true);
@@ -29,6 +32,7 @@ function Login(){
     const handleSubmit=(e)=>{
         e.preventDefault();
         const email=e.target.email.value;
+       
         const password=e.target.password.value;
         const data={
             email,
@@ -42,6 +46,9 @@ function Login(){
     return(
         <div className="bg-neutral-500 w-full h-[100vh] flex items-center justify-center">
             <div className="bg-white shadow-xl rounded-lg flex flex-col gap-5 items-center justify-center p-5">
+                {
+                    MyContext.isEmail ? <div className="bg-green-700 rounded-xl w-full text-center text-white py-2">Logged In Successfully</div>:<div></div>
+                }
                 <h1 className="text-2xl font-bold ">{isLogin ? "Login Form": "Signup Form"}</h1>
                 
                 <div className="flex gap-3 border-2 border-gray-200 rounded-2xl w-full">
